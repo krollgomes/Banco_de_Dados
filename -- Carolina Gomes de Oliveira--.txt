@@ -1,0 +1,37 @@
+-- Carolina Gomes de Oliveira--
+
+
+-- Exercício 1-- 
+
+Create table tbl_Professores(
+ID int identity (1,1) Primary key,
+Nome Varchar(50),
+Disciplina varchar(15));
+
+
+select * from tbl_Professores
+
+-- exercício 2 --
+
+insert into tbl_Professores
+(nome,Disciplina)
+Values
+('Ana Oliveira', 'Portugues');
+
+-- exercício 3 --
+
+update tbl_Professores
+set nome='Ana Silva'
+where ID=1
+
+-- exercício 3 -- 
+
+insert into tbl_Professores
+(Nome,Disciplina)
+Values
+('Maria', 'Ingles'),
+('joao', 'Matemtica'),
+('Vinicius', 'Educacao fisica'),
+('Ana', 'Quimica'),
+
+

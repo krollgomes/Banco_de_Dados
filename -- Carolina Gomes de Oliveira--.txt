@@ -24,14 +24,22 @@ update tbl_Professores
 set nome='Ana Silva'
 where ID=1
 
--- exercício 3 -- 
+-- exercício 4 -- 
 
 insert into tbl_Professores
 (Nome,Disciplina)
 Values
 ('Maria', 'Ingles'),
 ('joao', 'Matemtica'),
-('Vinicius', 'Educacao fisica'),
+('Vinicius', 'Educaca_fisica'),
 ('Ana', 'Quimica'),
+('Carlos', 'Artes'),
+('Augusto', Informatica')
+('Vitor', Estatistica')
+('Jones', Banco_de_dados),
+('Monica', Algebra')
+('Gustavo', tecnicas_de_Programacao);
+
+-- exercício 5 --
 
 

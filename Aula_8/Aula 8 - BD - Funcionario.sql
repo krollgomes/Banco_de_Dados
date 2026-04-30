@@ -38,3 +38,5 @@ values
 ('Fernanda', 'Gomes', 'fernanda.gomes@email.com', '(11) 6789-0123', '11-12-2013', 5300.00, 1),
 ('Luiz', 'Rodrigues', 'luiz.rodrigues@email.com', '(11) 7890-1234', '25-11-2025', 6200.00, 2),
 ('Mariana', 'Machado', 'mariana.machado@email.com', '(11) 8901-2345', '26-09-2020', 5400.00, 3)
+
+select * from

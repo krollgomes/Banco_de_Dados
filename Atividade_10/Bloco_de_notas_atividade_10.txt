@@ -1,0 +1,211 @@
+-- Questão 1 --
+SELECT * FROM CLIENTES
+
+-- Questão 2 --
+Create table filmes(
+cod_filme INTEGER PRIMARY KEY AUTOINCREMENT,
+filme varchar(40),
+cod_categoria int (5),
+Diretor varchar (100),
+Valor_locacao float,
+Reservada char (1),
+foreign Key (cod_categoria) References CATEGORIA (cod_categoria
+);
+
+INSERT INTO filmes (filme, cod_categoria, Diretor, Valor_locacao, Reservada) VALUES 
+('300', 1, 'Richard Donner', 3.5, 'n'),
+('Máquina Mortífera', 1, 'Richard Donner', 3.6, 'n'),
+('A Mexicana', 2, 'Burr Steers', 2.0, 's'),
+('A Verdade Nua e Crua', 2, 'Robert Luketic', 4.0, 'n'),
+('A vida é bela', 2, 'Roberto Benigni', 3.5, 's'),
+('Austrália', 3, 'Baz Luhrmann', 4.0, 's'),
+('Ultimato Bourn', 3, 'Paul Greengrass', 3.5, 'n'),
+('Constantine', 4, 'Francis Lawrence', 2.5, 's'),
+('Os Irmãos Grimm', 4, 'Terry Gilliam', 3.5, 'n'),
+('Os Doze Macacos', 4, 'Terry Gilliam', 2.5, 'n'),
+('Amadeus', 5, 'Milos Forman', 10.0, 'n'),
+('As Torres Gêmeas', 5, 'Oliver Stone', 2.5, 's'),
+('Platoon', 1, 'Oliver Stone', 5.5, 's'),
+('O Advogado do Diabo', 6, 'Taylor Hackford', 1.5, 's'),
+('Beowulf', 7, 'Robert Zemeckis', 1.0, 'n'),
+('Bolt o super cão', 7, 'Byron Howard', 1.5, 's'),
+('Apertem o cinto o piloto sumiu', 9, 'Jim Abrahams', 3.6, 's'),
+('Doze é demais', 9, 'Shawn Levy', 9.2, 's'),
+('Uma noite no museu', 9, 'Shawn Levy', 2.5, 'n');
+Select * From filmes
+
+-- Questão 3 --
+SELECT * FROM CATEGORIA
+
+-- Questão 4 --
+SELECT * FROM CLIENTES 
+WHERE sexo = 'M' 
+AND cidade = 'Sorocaba';
+
+-- Questão 5 --
+Select nome, telefone
+from CLIENTES
+order by nome;
+
+-- Questão 6 --
+
+select COUNT (*) CLIENTES from CLIENTES
+where sexo = 'F';
+
+-- Questao 7 -- 
+
+select nome_categoria
+from categoria
+order by nome_categoria
+
+-- Questao 8 --
+SELECT filme, reservada
+from  filmes
+where diretor = 'Shawn Levy' and reservada = 'n'
+
+-- Questao 9 --
+
+select filme
+from filmes
+where valor_locacao > 5.00 and reservada = 's'
+
+-- Questao 10 --
+select DISTINCT diretor 
+from filmes
+
+-- Questao 11 --
+
+select filme
+from filmes
+where reservada = 's'
+
+-- Questao 12 --
+
+select Max (valor_locacao) as maior_valor
+from filmes;
+
+-- Questao 13 --
+
+SELECT f.filme
+FROM filmes f
+JOIN categoria c ON f.cod_categoria = c.cod_categoria
+WHERE c.nome_categoria = 'Ação';
+
+-- Questão 14 --
+SELECT filme 
+FROM filmes 
+WHERE cod_categoria IN ('2', '3') 
+  AND cod_filme IN (SELECT cod_filme FROM locacao) 
+  AND valor_locacao < 5.00;
+
+-- Questão 15 --
+
+SELECT FILME FROM filmes
+WHERE COD_FILME IN (
+SELECT COD_FILME FROM LOCACAO
+WHERE COD_CLIENTE = '7'
+)
+
+-- Questão 16 --
+
+SELECT NOME FROM CLIENTES
+WHERE COD_CLIENTE IN (
+SELECT COD_CLIENTE FROM LOCACAO
+GROUP BY COD_CLIENTE
+HAVING COUNT(COD_CLIENTE) > 3
+)
+
+-- Questão 17 --
+
+SELECT SUM(VALOR_LOCACAO) FROM filmes
+WHERE COD_FILME IN (
+SELECT COD_FILME FROM LOCACAO
+WHERE COD_CLIENTE = '7'
+)
+
+
+-- Questão 18 --
+
+SELECT ROUND(AVG(VALOR_LOCACAO), 2) AS MÉDIA FROM filmes
+
+-- Questão 19 --
+
+SELECT MIN(VALOR_LOCACAO) FROM filmes
+
+
+-- Questão 20 -- 
+
+SELECT NOME_CATEGORIA, COUNT(*) AS QTD_FILMES 
+FROM filmes
+JOIN CATEGORIA ON filmes.cod_categoria = CATEGORIA.COD_CATEGORIA
+GROUP BY NOME_CATEGORIA;
+
+-- Questão 21 --
+
+SELECT COD_FILME, COUNT(*) AS QTD_LOCACOES
+FROM LOCACAO
+GROUP BY COD_FILME;
+
+-- Questão 22 --
+
+SELECT f.filme, l.DATA_LOCACAO 
+FROM filmes f
+JOIN LOCACAO l ON f.cod_filme = l.COD_FILME
+JOIN CLIENTES c ON l.COD_CLIENTE = c.COD_CLIENTE
+JOIN CATEGORIA cat ON f.cod_categoria = cat.COD_CATEGORIA
+WHERE cat.NOME_CATEGORIA = 'Ação'
+  AND f.Diretor = 'Richard Donner'
+  AND c.NOME = 'Edson Martin Feitosa';
+
+-- Questão 23 --
+
+SELECT FILME, VALOR_LOCACAO, (VALOR_LOCACAO * 0.10) AS DESCONTO, (VALOR_LOCACAO - (VALOR_LOCACAO * 0.10)) AS VALOR_FINAL FROM filmes
+
+-- Questão 24 --
+
+SELECT DISTINCT filmes.filme FROM filmes
+JOIN LOCACAO ON filmes.cod_filme = LOCACAO.COD_FILME
+JOIN CLIENTES ON LOCACAO.COD_CLIENTE = CLIENTES.COD_CLIENTE
+WHERE CLIENTES.CIDADE = 'Votorantim';
+
+-- Questão 25 --
+
+SELECT filmes.filme FROM filmes
+JOIN LOCACAO ON filmes.cod_filme = LOCACAO.COD_FILME
+WHERE LOCACAO.DATA_LOCACAO = DATE('now');
+  
+-- Questão 26 --
+
+SELECT SUM(Valor_locacao) AS LUCRO FROM filmes
+JOIN LOCACAO ON filmes.cod_filme = LOCACAO.COD_FILME
+WHERE filmes.filme = 'A vida é bela';
+
+-- Questão 27 --
+
+SELECT Diretor, COUNT(*) AS QTD_LOCACOES 
+FROM filmes
+JOIN LOCACAO ON filmes.cod_filme = LOCACAO.COD_FILME
+GROUP BY Diretor;
+
+-- Questão 28 --
+
+SELECT DISTINCT CATEGORIA.NOME_CATEGORIA FROM CATEGORIA
+JOIN FILME ON CATEGORIA.COD_CATEGORIA = FILME.COD_CATEGORIA
+JOIN LOCACOES ON FILME.COD_FILME = LOCACOES.COD_FILME
+JOIN CLIENTES ON LOCACOES.COD_CLIENTE = CLIENTES.COD_CLIENTE
+WHERE CLIENTES.NOME = 'Maria Chiquinha'
+
+-- Questão 29 -- 
+
+SELECT CLIENTES.NOME, CLIENTES.TELEFONE 
+FROM CLIENTES
+JOIN LOCACAO ON CLIENTES.COD_CLIENTE = LOCACAO.COD_CLIENTE
+JOIN filmes ON LOCACAO.COD_FILME = filmes.cod_filme
+WHERE filmes.filme = 'Constantine';
+
+-- Questão 30 -- 
+
+SELECT NOME_CATEGORIA FROM CATEGORIA
+WHERE COD_CATEGORIA NOT IN (
+SELECT COD_CATEGORIA     FROM filmes
+)
